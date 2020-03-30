@@ -1,0 +1,15 @@
+language: csharp
+mono:
+  - latest
+  
+script:
+  - cd src
+  - mcs -reference:System.Data.dll -target:library -out:RegEx.dll regex.cs
+  
+deploy:
+  provider: releases
+  api_key: $GITHUB_OAUTH_TOKEN
+  file: RegEx.dll
+  skip_cleanup: true
+  on:
+    tags: true
